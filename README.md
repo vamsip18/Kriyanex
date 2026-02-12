@@ -1,4 +1,4 @@
-# Welcome to your Kriyanex
+# Welcome to Kriyanex
 
 **Use your preferred IDE**
 
