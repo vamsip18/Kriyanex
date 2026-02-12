@@ -1,0 +1,606 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 140 10% 96%;
+    --foreground: 152 40% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 152 40% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 152 40% 8%;
+
+    --primary: 152 70% 14%;
+    --primary-foreground: 140 20% 95%;
+
+    --secondary: 215 70% 14%;
+    --secondary-foreground: 210 20% 95%;
+
+    --muted: 140 10% 90%;
+    --muted-foreground: 152 15% 40%;
+
+    --accent: 152 60% 30%;
+    --accent-foreground: 140 20% 95%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 152 20% 85%;
+    --input: 152 20% 85%;
+    --ring: 152 70% 14%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --kriyanex-green: 152 70% 14%;
+    --kriyanex-blue: 215 70% 14%;
+    --kriyanex-green-light: 152 50% 35%;
+    --kriyanex-blue-light: 215 50% 35%;
+    --kriyanex-emerald: 160 60% 45%;
+    --kriyanex-teal: 175 50% 40%;
+    --kriyanex-sage: 140 15% 92%;
+    --kriyanex-cream: 45 30% 96%;
+    --kriyanex-gold: 42 80% 55%;
+
+    --sidebar-background: 152 70% 8%;
+    --sidebar-foreground: 140 20% 95%;
+    --sidebar-primary: 152 70% 14%;
+    --sidebar-primary-foreground: 140 20% 95%;
+    --sidebar-accent: 152 50% 20%;
+    --sidebar-accent-foreground: 140 20% 95%;
+    --sidebar-border: 152 30% 25%;
+    --sidebar-ring: 152 60% 45%;
+  }
+
+  .dark {
+    --background: 215 50% 6%;
+    --foreground: 140 20% 95%;
+    --card: 215 50% 8%;
+    --card-foreground: 140 20% 95%;
+    --popover: 215 50% 8%;
+    --popover-foreground: 140 20% 95%;
+    --primary: 152 60% 45%;
+    --primary-foreground: 152 70% 8%;
+    --secondary: 215 40% 25%;
+    --secondary-foreground: 210 20% 95%;
+    --muted: 215 30% 15%;
+    --muted-foreground: 140 10% 60%;
+    --accent: 152 50% 35%;
+    --accent-foreground: 140 20% 95%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 30% 20%;
+    --input: 215 30% 20%;
+    --ring: 152 60% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+
+  /* Glass morphism effects */
+  .glass {
+    @apply backdrop-blur-xl border;
+    background: hsla(var(--card), 0.6);
+    border-color: hsla(var(--border), 0.3);
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl border;
+    background: hsla(var(--kriyanex-green), 0.15);
+    border-color: hsla(var(--kriyanex-emerald), 0.2);
+  }
+
+  .glass-frost {
+    @apply backdrop-blur-2xl border;
+    background: hsla(0, 0%, 100%, 0.08);
+    border-color: hsla(0, 0%, 100%, 0.15);
+    box-shadow: 0 8px 32px hsla(var(--kriyanex-green), 0.1),
+      inset 0 1px 0 hsla(0, 0%, 100%, 0.1);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl rounded-xl border p-6 transition-all duration-500;
+    background: hsla(var(--card), 0.7);
+    border-color: hsla(var(--border), 0.4);
+    box-shadow: 0 4px 24px hsla(var(--kriyanex-green), 0.06);
+  }
+
+  .glass-card:hover {
+    background: hsla(var(--card), 0.85);
+    border-color: hsla(var(--kriyanex-emerald), 0.3);
+    box-shadow: 0 12px 40px hsla(var(--kriyanex-green), 0.12),
+      0 0 0 1px hsla(var(--kriyanex-emerald), 0.1);
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* Cellular Membrane Glass — semi-permeable organic edge blur */
+  .glass-cellular {
+    @apply backdrop-blur-xl border;
+    background: hsla(152, 40%, 18%, 0.14);
+    border-color: hsla(var(--kriyanex-emerald), 0.18);
+    border-radius: 20px;
+    box-shadow:
+      inset 0 0 40px hsla(var(--kriyanex-emerald), 0.04),
+      0 2px 0 hsla(0, 0%, 100%, 0.05);
+  }
+
+  .glass-cellular:hover {
+    background: hsla(152, 40%, 18%, 0.22);
+    border-color: hsla(var(--kriyanex-emerald), 0.3);
+    box-shadow:
+      inset 0 0 50px hsla(var(--kriyanex-emerald), 0.06),
+      0 8px 30px hsla(var(--kriyanex-green), 0.12);
+  }
+
+  /* Hydroponic Layer Glass — liquid-suspended appearance */
+  .glass-hydroponic {
+    backdrop-filter: blur(20px) brightness(1.08);
+    background: linear-gradient(180deg,
+        hsla(175, 50%, 40%, 0.1) 0%,
+        hsla(160, 60%, 45%, 0.16) 100%);
+    border: 1px solid hsla(175, 50%, 40%, 0.2);
+    box-shadow:
+      0 6px 30px hsla(175, 50%, 40%, 0.1),
+      inset 0 -3px 20px hsla(175, 50%, 40%, 0.04);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .glass-hydroponic:hover {
+    background: linear-gradient(180deg,
+        hsla(175, 50%, 40%, 0.15) 0%,
+        hsla(160, 60%, 45%, 0.22) 100%);
+    box-shadow:
+      0 10px 40px hsla(175, 50%, 40%, 0.15),
+      inset 0 -3px 20px hsla(175, 50%, 40%, 0.06);
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* Microscope Slide Glass — lab specimen refractive edge */
+  .glass-microscope {
+    backdrop-filter: blur(8px) contrast(1.05);
+    background: hsla(0, 0%, 100%, 0.05);
+    border: 1.5px solid hsla(0, 0%, 100%, 0.1);
+    box-shadow:
+      3px 3px 0 hsla(0, 0%, 100%, 0.03),
+      -1px -1px 0 hsla(0, 0%, 100%, 0.05),
+      0 0 30px hsla(var(--kriyanex-emerald), 0.04) inset;
+  }
+
+  .glass-microscope:hover {
+    background: hsla(0, 0%, 100%, 0.08);
+    border-color: hsla(var(--kriyanex-emerald), 0.2);
+    box-shadow:
+      3px 3px 0 hsla(0, 0%, 100%, 0.05),
+      -1px -1px 0 hsla(0, 0%, 100%, 0.07),
+      0 0 40px hsla(var(--kriyanex-emerald), 0.08) inset;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-header {
+    background: linear-gradient(135deg,
+        hsl(var(--kriyanex-green)) 0%,
+        hsl(var(--kriyanex-blue)) 100%);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(160deg,
+        hsl(var(--kriyanex-green)) 0%,
+        hsl(215, 60%, 18%) 50%,
+        hsl(var(--kriyanex-blue)) 100%);
+  }
+
+  .gradient-section {
+    background: linear-gradient(180deg,
+        hsl(var(--kriyanex-sage)) 0%,
+        hsl(var(--kriyanex-cream)) 100%);
+    background-image:
+      linear-gradient(180deg, hsl(var(--kriyanex-sage)) 0%, hsl(var(--kriyanex-cream)) 100%),
+      radial-gradient(circle, hsla(var(--kriyanex-emerald), 0.06) 1px, transparent 1px);
+    background-size: 100% 100%, 24px 24px;
+  }
+
+  /* Topographic contour pattern — organic depth */
+  .pattern-topo {
+    position: relative;
+  }
+
+  .pattern-topo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, hsla(var(--kriyanex-emerald), 0.3) 41px, transparent 42px),
+      repeating-radial-gradient(circle at 30% 70%, transparent 0, transparent 60px, hsla(var(--kriyanex-teal), 0.2) 61px, transparent 62px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Cross-hatch subtle grid */
+  .pattern-crosshatch {
+    position: relative;
+  }
+
+  .pattern-crosshatch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image:
+      linear-gradient(45deg, hsla(var(--kriyanex-emerald), 0.4) 1px, transparent 1px),
+      linear-gradient(-45deg, hsla(var(--kriyanex-teal), 0.4) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Organic cell pattern */
+  .pattern-cells {
+    position: relative;
+  }
+
+  .pattern-cells::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image:
+      radial-gradient(ellipse 60px 50px at 25% 30%, hsla(var(--kriyanex-emerald), 0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 40px 60px at 75% 60%, hsla(var(--kriyanex-teal), 0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 50px 45px at 50% 80%, hsla(var(--kriyanex-emerald), 0.3) 0%, transparent 70%),
+      radial-gradient(ellipse 55px 40px at 15% 70%, hsla(var(--kriyanex-gold), 0.3) 0%, transparent 70%),
+      radial-gradient(ellipse 45px 55px at 85% 25%, hsla(var(--kriyanex-teal), 0.35) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg,
+        hsl(var(--kriyanex-emerald)) 0%,
+        hsl(var(--kriyanex-teal)) 100%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg,
+        hsl(var(--kriyanex-emerald)) 0%,
+        hsl(var(--kriyanex-teal)) 50%,
+        hsl(var(--kriyanex-gold)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Mesh gradient */
+  .mesh-gradient {
+    background-color: hsl(var(--kriyanex-green));
+    background-image:
+      radial-gradient(at 20% 80%, hsl(var(--kriyanex-blue)) 0%, transparent 50%),
+      radial-gradient(at 80% 20%, hsl(var(--kriyanex-emerald)) 0%, transparent 50%),
+      radial-gradient(at 50% 50%, hsl(215, 60%, 18%) 0%, transparent 60%),
+      radial-gradient(at 90% 90%, hsl(var(--kriyanex-teal)) 0%, transparent 40%);
+  }
+
+  /* Glow effects */
+  .glow-green {
+    box-shadow: 0 0 20px hsla(var(--kriyanex-emerald), 0.3),
+      0 0 60px hsla(var(--kriyanex-emerald), 0.1);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 30px hsla(var(--kriyanex-emerald), 0.5),
+      0 0 60px hsla(var(--kriyanex-emerald), 0.2);
+  }
+
+  /* Hover effects */
+  .hover-glow {
+    @apply transition-all duration-500;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsla(var(--kriyanex-emerald), 0.3),
+      0 0 80px hsla(var(--kriyanex-emerald), 0.1);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px hsla(var(--kriyanex-green), 0.15);
+  }
+
+  .tile-hover {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .tile-hover:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 32px hsla(var(--kriyanex-green), 0.12);
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  /* Particle effects */
+  .particle {
+    animation: particleFloat 12s ease-in-out infinite;
+  }
+
+  /* Pulse ring */
+  .pulse-ring {
+    animation: pulseRing 3s ease-out infinite;
+  }
+
+  /* Shimmer */
+  .shimmer {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        hsla(0, 0%, 100%, 0.08) 50%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+
+  /* Stomatal breathing — opening/closing rhythm */
+  .stomatal-breathe {
+    animation: stomatalBreathing 3s ease-in-out infinite;
+  }
+
+  /* Vascular flow dash animation */
+  .vascular-flow {
+    animation: vascularFlow 2s linear infinite;
+  }
+
+  /* Phyllotaxis spiral motion */
+  .phyllotaxis-motion {
+    animation: phyllotaxisSpiral 12s ease-in-out infinite;
+  }
+}
+
+/* Reduced motion: respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+
+  66% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+
+@keyframes particleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.3;
+  }
+
+  25% {
+    transform: translateY(-30px) translateX(15px) scale(1.1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(-15px) translateX(-10px) scale(0.9);
+    opacity: 0.4;
+  }
+
+  75% {
+    transform: translateY(-25px) translateX(20px) scale(1.05);
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes scrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateOrbit {
+  0% {
+    transform: rotate(0deg) translateX(var(--orbit-radius, 120px)) rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg) translateX(var(--orbit-radius, 120px)) rotate(-360deg);
+  }
+}
+
+@keyframes morphBlob {
+
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 40% 70% 60%;
+  }
+
+  75% {
+    border-radius: 60% 30% 60% 40% / 70% 50% 40% 60%;
+  }
+}
+
+@keyframes stomatalBreathing {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.18);
+    opacity: 0.95;
+  }
+}
+
+@keyframes vascularFlow {
+  0% {
+    stroke-dashoffset: 24;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes phyllotaxisSpiral {
+  0% {
+    transform: rotate(0deg) translateX(0) scale(1);
+  }
+
+  25% {
+    transform: rotate(137.5deg) translateX(5px) scale(1.05);
+  }
+
+  50% {
+    transform: rotate(275deg) translateX(0) scale(1);
+  }
+
+  75% {
+    transform: rotate(412.5deg) translateX(-5px) scale(0.95);
+  }
+
+  100% {
+    transform: rotate(550deg) translateX(0) scale(1);
+  }
+}
+
+@keyframes environmentalPulse {
+
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+
+  50% {
+    filter: brightness(1.05) saturate(1.1);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--kriyanex-green-light));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--kriyanex-emerald));
+}
+
